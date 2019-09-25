@@ -1,4 +1,4 @@
-﻿if (Get-InstalledModule -Name "AzureAD" -ErrorAction SilentlyContinue) {
+if (Get-InstalledModule -Name "AzureAD" -ErrorAction SilentlyContinue) {
     "Importing Azure AD Module"
     Import-Module -Name "AzureAD"
 } else {
@@ -43,9 +43,18 @@ $WebAppKey = New-Guid
 $Date = Get-Date
 New-AzureADApplicationPasswordCredential -ObjectId $WebApp.ObjectID -startDate $Date -endDate $Date.AddYears(1) -Value $WebAppKey.Guid -CustomKeyIdentifier "Password"
 $TenantID = (Get-AzureADCurrentSessionInfo).tenantid
-"Generating Authenitcation Token script for AIP Scanner Service"    
+"Generating Authenitcation Token scripts for AIP Scanner Service"    
 Start-Sleep -Seconds 5
-'$ServiceAccount = Get-Credential "Enter the on-premises service account credentials"' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1
+'"A browser will launch to the created web application to provide Admin consent for the required API permissions. Please log in with tenant admin credentials to provide permissions for this application.  If you are unable to provide this consent, please provide the URL below to your tenant administrator."' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1
+'$weburl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/'+$WebApp.AppId+'/isMSAApp/"' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
+"" | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
+'$weburl' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
+'"Press Enter below to launch the browser"' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
+"" | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
+'Pause' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
+'Start-Process $weburl' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
+'Pause' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
+'$ServiceAccount = Get-Credential "Enter the on-premises service account credentials"' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -Append
 "Set-AIPAuthentication -AppID " + $WebApp.AppId + " -AppSecret " + $WebAppKey.Guid + " -TenantID " + $TenantID.Guid + ' -OnBehalfOf $ServiceAccount' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -append
 ""
 "Authenitcation Token script stored on the desktop as Set-AIPAUthenticationUL.ps1"
