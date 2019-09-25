@@ -56,7 +56,7 @@ Start-Sleep -Seconds 5
 'Start-Process $weburl' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
 'Pause' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
 
-'$ServiceAccount = Get-Credential "Enter the on-premises service account credentials"' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -Append
+'$ServiceAccount = Get-Credential -Message "Enter the on-premises service account credentials"' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -Append
 "Set-AIPAuthentication -AppID " + $WebApp.AppId + " -AppSecret " + $WebAppKey.Guid + " -TenantID " + $TenantID.Guid + ' -OnBehalfOf $ServiceAccount' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -append
 ""
 "Authenitcation Token scripts stored on the desktop as Grant-AdminConsentUL.ps1 and Set-AIPAUthenticationUL.ps1"
