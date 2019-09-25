@@ -58,17 +58,15 @@ Start-Sleep -Seconds 5
 
 '$ServiceAccount = Get-Credential -Message "Enter the on-premises service account credentials"' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -Append
 "Set-AIPAuthentication -AppID " + $WebApp.AppId + " -AppSecret " + $WebAppKey.Guid + " -TenantID " + $TenantID.Guid + ' -OnBehalfOf $ServiceAccount' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -append
+"Restart-Service AIPScanner" | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -append
+"Start-AIPScan" | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -append
 ""
 "Authenitcation Token scripts stored on the desktop as Grant-AdminConsentUL.ps1 and Set-AIPAUthenticationUL.ps1"
 ""
 "Follow the instructions at https://aka.ms/ScannerBlog to install the service"
 ""
-"Run the commands below to complete your AIP scanner installation"
+"Run the Grant-AdminConsentUL.ps1 from any computer one time to authorize all AIP scanner servers"
 ""
-"In the context of the AIP service account, run the Set-AIPAuthentication command stored in the text file"
-"When prompted, sign in using the cloud or synced AIP scanner service account"
+"Run the commands in the Set-AIPAUthenticationUL.ps1 script from an admin command prompt on each of the AIP scanner servers to complete your AIP scanner installation"
 ""
-"In an Admin PowerShell prompt, run the command below"
-"Restart-Service AIPScanner"
-"Start-AIPScan"
 Pause
