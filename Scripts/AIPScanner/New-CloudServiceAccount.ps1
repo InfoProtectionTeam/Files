@@ -9,7 +9,7 @@
 
 Pause
 
-if (Get-InstalledModule -Name "AzureAD") {
+if (Get-InstalledModule -Name "AzureAD" -ErrorAction SilentlyContinue) {
     "Importing Azure AD Module"
     Import-Module -Name "AzureAD"
 } else {
