@@ -54,9 +54,8 @@ Start-Sleep -Seconds 5
 "" | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
 'Pause' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
 'Start-Process $weburl' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
-'Pause' | Out-File ~\Desktop\Grant-AdminConsentUL.ps1 -Append
 
-'$ServiceAccount = Get-Credential -Message "Enter the on-premises service account credentials"' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -Append
+'$ServiceAccount = Get-Credential -Message "Enter the on-premises service account credentials"' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1
 "Set-AIPAuthentication -AppID " + $WebApp.AppId + " -AppSecret " + $WebAppKey.Guid + " -TenantID " + $TenantID.Guid + ' -OnBehalfOf $ServiceAccount' | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -append
 "Restart-Service AIPScanner" | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -append
 "Start-AIPScan" | Out-File ~\Desktop\Set-AIPAuthenticationUL.ps1 -append
