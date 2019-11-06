@@ -48,8 +48,10 @@ Contoso\JeffL|Password$fun|Used to log into VictimPC
 
 The personas used in the lab are Megan Bowen, Allan DeYoung, and Alex Wilbur.  These and the users above are arbitrary and may be replaced as you see fit with Azure AD synchronized users to facilitate SSO if you prefer.
 
-The scripts and sample docs used in this lab can be found as zip files at https://aka.ms/MIPFiles in the Scripts directory.  The scripts are extracted to C:\Scripts on AdminPC. The docs are extracted to C:\PII and also staged in a shared folder called documents on AdminPC.
+The scripts and sample docs used in this lab can be found as zip files at https://aka.ms/MIPFiles in the Scripts directory.  The scripts are extracted to C:\Scripts on AdminPC. The AIP Scanner scripts assume the SQL server name is AdminPC so modify as necessary if you do not use this name.  The docs are extracted to C:\PII and also staged in a shared folder called documents on AdminPC.
 
 The AIP Unified Labeling client can be downloaded from https://aka.ms/AIPClient
+
+Throughout the lab you will see refernce to **yourdomain.onmicrosoft.com**. This is a placeholder for your test tenant.  Please replace these references with your own domain.
 
 [Next - The Microsoft Information Protection Story](0.MIP.md)

@@ -13,11 +13,10 @@ In this lab, we:
  - Learned how to configure Exchange Online mail flow rules to control access to sensitive data
  - Learned about the monitoring, alerting and remediation capabilities available via AIP Analytics, Microsoft Defender Advanced Threat Protection, and Azure Sentinel
 
-This lab was designed to be an interactive supplement to the **AIP Deployment Acceleration Guide** which can be downloaded at <copy>https://aka.ms/AIPDAG</copy>.  
+This lab was designed to be an interactive supplement to the **AIP Deployment Acceleration Guide** which can be downloaded at **https://aka.ms/AIPDAG**.  
 
 The AIP Deployment Acceleration Guide contains much of the same content, but goes into additional detail in each of the phases and links to resources that we did not include in this format due to time constraints.
 
-If you have feedback about the AIP Deployment Acceleration Guide or the content of this lab experience, please fill out the form at https://aka.ms/AIPDAGFeedback
-
+If you have feedback about the AIP Deployment Acceleration Guide or the content of this lab experience, please fill out the form at **https://aka.ms/AIPDAGFeedback**
 ## Lab Complete
 >![](./media/ninjacat.png)
