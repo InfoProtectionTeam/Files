@@ -26,3 +26,13 @@ Expected Knowledge:
  - A basic understanding of AIP fundamentals including labels, policies, and scoped policy configuration
  - A basic understanding of Exchange Online administration
  - A basic understanding of PowerShell
+
+Lab Environment:
+
+These instructions are built for a lab environment containing 4 virtual machines.  The properties of these are listed below.
+
+
+
+
+
+[Next - The Microsoft Information Protection Story](0.MIP.md)
