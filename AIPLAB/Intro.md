@@ -50,4 +50,6 @@ The personas used in the lab are Megan Bowen, Allan DeYoung, and Alex Wilbur.  T
 
 The scripts and sample docs used in this lab can be found as zip files at https://aka.ms/MIPFiles in the Scripts directory.  The scripts are extracted to C:\Scripts on AdminPC. The docs are extracted to C:\PII and also staged in a shared folder called documents on AdminPC.
 
+The AIP Unified Labeling client can be downloaded from https://aka.ms/AIPClient
+
 [Next - The Microsoft Information Protection Story](0.MIP.md)
