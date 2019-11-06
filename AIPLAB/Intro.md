@@ -31,8 +31,23 @@ Lab Environment:
 
 These instructions are built for a lab environment containing 4 virtual machines.  The properties of these are listed below.
 
+Servername | Software Installed
+-|-
+ContosoDC | Domain Controller for Contoso.Azure
+AdminPC | SQL Server Developer Edition, Office 365 ProPlus, AIP Unified Labeling Client
+Client01 | Office 365 ProPlus, AIP Unified Labeling Client
+VictimPC | Office 365 ProPlus, AIP Unified Labeling Client
 
+The user accounts used are listed below
 
+Username|Password|Properties
+-|-|-
+Contoso\AIPScanner|Somepass1|Local Admin rights on AdminPC, SQL Admin permissions on SQL instance, Used for deploying AIP Scanner
+Contoso\LisaV|HighImpactUser1!|Used to log into Client01
+Contoso\JeffL|Password$fun|Used to log into VictimPC
 
+The personas used in the lab are Megan Bowen, Allan DeYoung, and Alex Wilbur.  These and the users above are arbitrary and may be replaced as you see fit with Azure AD synchronized users to facilitate SSO if you prefer.
+
+The scripts and sample docs used in this lab can be found as zip files at https://aka.ms/MIPFiles in the Scripts directory.  The scripts are extracted to C:\Scripts on AdminPC. The docs are extracted to C:\PII and also staged in a shared folder called documents on AdminPC.
 
 [Next - The Microsoft Information Protection Story](0.MIP.md)
