@@ -35,7 +35,14 @@ $ReqAccessUL.ResourceAppId = $SvcPrincipalUL.AppId
 $Role4 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "8b2071cd-015a-4025-8052-1c0dba2d3f64", "Role"
 $ReqAccessUL.ResourceAccess = $Role4
 
-New-AzureADApplication -DisplayName $DisplayName -ReplyURLs http://localhost -RequiredResourceAccess @($ReqAccess, $ReqAccessUL)
+$SvcPrincipalGr = Get-AzureADServicePrincipal -All $true | ? { $_.DisplayName -match "Microsoft Graph" }
+$ReqAccessGr = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
+$ReqAccessGr.ResourceAppId = $SvcPrincipalGr.AppId
+
+$Scope1 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "e1fe6dd8-ba31-4d61-89e7-88639da4683d", "Scope"
+$ReqAccessGr.ResourceAccess = $Scope1
+
+New-AzureADApplication -DisplayName $DisplayName -ReplyURLs http://localhost -RequiredResourceAccess @($ReqAccess, $ReqAccessUL, $ReqAccessGr)
 $WebApp = Get-AzureADApplication -Filter "DisplayName eq '$DisplayName'"
 New-AzureADServicePrincipal -AppId $WebApp.AppId
 $WebAppKey = New-Guid
