@@ -45,8 +45,10 @@ $ReqAccessGr.ResourceAccess = $Scope1
 New-AzureADApplication -DisplayName $DisplayName -ReplyURLs http://localhost -RequiredResourceAccess @($ReqAccess, $ReqAccessUL, $ReqAccessGr)
 $WebApp = Get-AzureADApplication -Filter "DisplayName eq '$DisplayName'"
 New-AzureADServicePrincipal -AppId $WebApp.AppId
+
 $WebAppKey = New-Guid
 $Date = Get-Date
+
 New-AzureADApplicationPasswordCredential -ObjectId $WebApp.ObjectID -startDate $Date -endDate $Date.AddYears(1) -Value $WebAppKey.Guid -CustomKeyIdentifier "Password"
 $TenantID = (Get-AzureADCurrentSessionInfo).tenantid
 
@@ -71,7 +73,7 @@ Start-Sleep -Seconds 5
 ""
 "Follow the instructions at https://aka.ms/ScannerBlog to install the service"
 ""
-"Run the Grant-AdminConsentUL.ps1 from any computer one time to authorize all AIP scanner servers"
+"Run the Grant-AdminConsentUL.ps1 from any computer with internet access (one time) to authorize all AIP scanner servers"
 ""
 "Run the commands in the Set-AIPAUthenticationUL.ps1 script from an admin command prompt on each of the AIP scanner servers to complete your AIP scanner installation"
 ""
