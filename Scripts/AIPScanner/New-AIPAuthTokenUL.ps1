@@ -8,13 +8,21 @@ if (Get-InstalledModule -Name "AzureAD" -ErrorAction SilentlyContinue) {
     Import-Module -Name "AzureAD"
 }
 
+# Capture Global Admin credential
+
 $gacred = get-credential -Message "Enter Azure Global Admin Credentials"
+
+# Connect to Azure AD
 
 "Connecting to Azure AD"
 Connect-AzureAD -Credential $gacred
 
+# Store date and create unique Display Name for AAD application (you may comment out these lines and set $DisplayName to a unique value if desired)
+
 $Date = Get-Date -UFormat %m%d%H%M
 $DisplayName = "AIPOBOv2-" + $Date
+
+# Creating Azure AD Application. This will create the application and assign permissions for Microsoft Rights Management Services, Microsoft Information Protection Sync Service, and Microsoft Graph.
 
 "Creating Azure AD Applications. This may take 1-2 minutes."	
 "Creating Web Application $DisplayName and Secret key with one year expiration "
@@ -37,7 +45,7 @@ $ReqAccessUL.ResourceAccess = $Role4
 
 $SvcPrincipalGr = Get-AzureADServicePrincipal -All $true | ? { $_.DisplayName -match "Microsoft Graph" }
 $ReqAccessGr = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
-$ReqAccessGr.ResourceAppId = $SvcPrincipalGr.AppId
+$ReqAccessGr.ResourceAppId = $SvcPrincipalGr.AppId[1]
 
 $Scope1 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "e1fe6dd8-ba31-4d61-89e7-88639da4683d", "Scope"
 $ReqAccessGr.ResourceAccess = $Scope1
@@ -51,6 +59,8 @@ $Date = Get-Date
 
 New-AzureADApplicationPasswordCredential -ObjectId $WebApp.ObjectID -startDate $Date -endDate $Date.AddYears(1) -Value $WebAppKey.Guid -CustomKeyIdentifier "Password"
 $TenantID = (Get-AzureADCurrentSessionInfo).tenantid
+
+# Generate Authentication Token scripts
 
 "Generating Authenitcation Token scripts for AIP Scanner Service"    
 Start-Sleep -Seconds 5
