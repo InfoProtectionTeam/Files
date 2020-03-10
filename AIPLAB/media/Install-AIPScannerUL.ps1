@@ -42,7 +42,7 @@ $ReqAccessUL.ResourceAccess = $Role4
 
 $SvcPrincipalGr = Get-AzureADServicePrincipal -All $true | ? { $_.DisplayName -match "Microsoft Graph" }
 $ReqAccessGr = New-Object -TypeName "Microsoft.Open.AzureAD.Model.RequiredResourceAccess"
-$ReqAccessGr.ResourceAppId = $SvcPrincipalGr.AppId[1]
+$ReqAccessGr.ResourceAppId = $SvcPrincipalGr.AppId
 
 $Scope1 = New-Object -TypeName "Microsoft.Open.AzureAD.Model.ResourceAccess" -ArgumentList "e1fe6dd8-ba31-4d61-89e7-88639da4683d", "Scope"
 $ReqAccessGr.ResourceAccess = $Scope1
