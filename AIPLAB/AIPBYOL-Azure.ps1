@@ -8,18 +8,8 @@ Install-Module Az
 
 #You will require ISO for Office 2019 placed in your C:\LabSources\ISOs\ folder. If the Office ISOs you use are not the same as the ones listed below, please update the script to match yours.
 #>
-$labName = 'AIPBYOL-<UNIQUENAME>' #THIS NAME MUST BE GLOBALLY UNIQUE
-
-$azureDefaultLocation = 'Central US' #COMMENT OUT -DefaultLocationName BELOW TO USE THE FASTEST LOCATION
-
-
-
-#create an empty lab template and define where the lab XML files and the VMs will be stored
-New-LabDefinition -Name $labName -DefaultVirtualizationEngine Azure
-
-Add-LabAzureSubscription -DefaultLocationName $azureDefaultLocation
-
 $labsources = Get-LabSourcesLocation -Local
+
 #Download Software
 $AzInfoProtectionFileName = 'AzInfoProtection_UL.exe'
 $AzInfoProtectionFilePath = Join-Path -Path $labSources\SoftwarePackages -ChildPath $AzInfoProtectionFileName
@@ -43,8 +33,17 @@ if (-not (Test-Path -Path $PIIZIPFilePath))
     Get-LabInternetFile -Uri $PIIZIPUri -Path $PIIZIPFilePath
 }
 
+$labName = 'AIPBYOL-<UNIQUENAME>' #THIS NAME MUST BE GLOBALLY UNIQUE
+
+$azureDefaultLocation = 'Central US' #COMMENT OUT -DefaultLocationName BELOW TO USE THE FASTEST LOCATION
+
+#create an empty lab template and define where the lab XML files and the VMs will be stored
+New-LabDefinition -Name $labName -DefaultVirtualizationEngine Azure
+
+Add-LabAzureSubscription -DefaultLocationName $azureDefaultLocation
+
 #make the network definition
-Add-LabVirtualNetworkDefinition -Name AIPBYOL -AddressSpace 192.168.41.0/24 
+Add-LabVirtualNetworkDefinition -Name $labName -AddressSpace 192.168.41.0/24 
 
 #and the domain definition with the domain admin account
 Add-LabDomainDefinition -Name contoso.azure -AdminUser Install -AdminPassword 'AIP4life!'
