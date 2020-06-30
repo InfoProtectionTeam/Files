@@ -1,4 +1,4 @@
-﻿<#
+<#
 #If you have not yet installed AutomatedLab, download the MSI from https://github.com/AutomatedLab/AutomatedLab/releases or run the PowerShell commands below.
 
 Install-PackageProvider Nuget -Force
@@ -8,7 +8,7 @@ Install-Module Az
 
 #You will require ISO for Office 2019 placed in your C:\LabSources\ISOs\ folder. If the Office ISOs you use are not the same as the ones listed below, please update the script to match yours.
 #>
-$labsources = Get-LabSourcesLocation -Local
+$labSources = Get-LabSourcesLocation -Local
 
 #Download Software
 $AzInfoProtectionFileName = 'AzInfoProtection_UL.exe'
@@ -43,9 +43,9 @@ New-LabDefinition -Name $labName -DefaultVirtualizationEngine Azure
 Add-LabAzureSubscription -DefaultLocationName $azureDefaultLocation
 
 #make the network definition
-Add-LabVirtualNetworkDefinition -Name $labName -AddressSpace 192.168.41.0/24 
+Add-LabVirtualNetworkDefinition -Name $labname -AddressSpace 192.168.41.0/24 
 
-#and the domain definition with the domain admin account
+#add the domain definition with the domain admin account
 Add-LabDomainDefinition -Name contoso.azure -AdminUser Install -AdminPassword 'AIP4life!'
 
 $ServerOS = 'Windows Server 2019 Datacenter (Desktop Experience)'
@@ -56,11 +56,11 @@ Sync-LabAzureLabSources -SkipIsos
 Sync-LabAzureLabSources -Filter *en_office_professional_plus_2019_x86_x64_dvd_7ea28c99* 
 
 $postInstallActivity = Get-LabPostInstallationActivity -ScriptFileName PrepareRootDomain.ps1 -DependencyFolder $labSources\PostInstallationActivities\PrepareRootDomain
-Add-LabMachineDefinition -Name ContosoDC -Roles RootDC -Memory 1GB -Processors 1 -OperatingSystem $ServerOS -IpAddress 192.168.41.10 -Network AIPBYOL -Domain contoso.azure -PostInstallationActivity $postInstallActivity
+Add-LabMachineDefinition -Name ContosoDC -Roles RootDC -Memory 1GB -Processors 1 -OperatingSystem $ServerOS -IpAddress 192.168.41.10 -Network $labName -Domain contoso.azure -PostInstallationActivity $postInstallActivity
 $postInstallActivity = Get-LabPostInstallationActivity -CustomRole Office2019 -Properties @{ IsoPath = "$labSources\ISOs\en_office_professional_plus_2019_x86_x64_dvd_7ea28c99.iso" }
 $role = Get-LabMachineRoleDefinition -Role SQLServer2017
-Add-LabMachineDefinition -Name AdminPC -Roles $role -Memory 2GB -OperatingSystem $ServerOS -IpAddress 192.168.41.50 -Network AIPBYOL -PostInstallationActivity $postInstallActivity -Domain contoso.azure
-Add-LabMachineDefinition -Name ClientPC -Memory 2GB -Processors 1 -OperatingSystem $ServerOS -IpAddress 192.168.41.51 -Network AIPBYOL -PostInstallationActivity $postInstallActivity -Domain contoso.azure
+Add-LabMachineDefinition -Name AdminPC -Roles $role -Memory 2GB -OperatingSystem $ServerOS -IpAddress 192.168.41.50 -Network $labName -PostInstallationActivity $postInstallActivity -Domain contoso.azure
+Add-LabMachineDefinition -Name ClientPC -Memory 2GB -Processors 1 -OperatingSystem $ServerOS -IpAddress 192.168.41.51 -Network $labName -PostInstallationActivity $postInstallActivity -Domain contoso.azure
 
 Install-Lab
 
