@@ -8,7 +8,7 @@ Install-Module Az
 
 #You will require ISO for Office 2019 placed in your C:\LabSources\ISOs\ folder. If the Office ISOs you use are not the same as the ones listed below, please update the script to match yours.
 #>
-$labName = 'AIPBYOL-KRM' #THIS NAME MUST BE GLOBALLY UNIQUE
+$labName = 'AIPBYOL-<UNIQUENAME>' #THIS NAME MUST BE GLOBALLY UNIQUE
 
 $azureDefaultLocation = 'Central US' #COMMENT OUT -DefaultLocationName BELOW TO USE THE FASTEST LOCATION
 
