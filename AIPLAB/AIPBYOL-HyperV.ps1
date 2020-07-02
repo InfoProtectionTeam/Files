@@ -1,4 +1,4 @@
-﻿<#
+<#
 #If you have not yet installed AutomatedLab, download the MSI from https://github.com/AutomatedLab/AutomatedLab/releases or run the PowerShell commands below.
 
 Install-PackageProvider Nuget -Force
@@ -47,8 +47,8 @@ $postInstallActivity = Get-LabPostInstallationActivity -ScriptFileName PrepareRo
 Add-LabMachineDefinition -Name ContosoDC -Roles RootDC -Memory 1GB -Processors 4 -OperatingSystem $ServerOS -Domain contoso.azure -PostInstallationActivity $postInstallActivity
 $postInstallActivity = Get-LabPostInstallationActivity -CustomRole Office2019 -Properties @{ IsoPath = "$labSources\ISOs\en_office_professional_plus_2019_x86_x64_dvd_7ea28c99.iso" }
 $role = Get-LabMachineRoleDefinition -Role SQLServer2017 -Properties @{Features = 'SQL,Tools'}
-Add-LabMachineDefinition -Name AdminPC -Roles $role -Memory 2GB -Processors 4 -OperatingSystem $ServerOS -PostInstallationActivity $postInstallActivity
-Add-LabMachineDefinition -Name ClientPC -Memory 2GB -Processors 4 -OperatingSystem $ServerOS -PostInstallationActivity $postInstallActivity
+Add-LabMachineDefinition -Name AdminPC -Roles $role -Memory 2GB -Processors 4 -OperatingSystem $ServerOS -PostInstallationActivity $postInstallActivity -Domain contoso.azure
+Add-LabMachineDefinition -Name ClientPC -Memory 2GB -Processors 4 -OperatingSystem $ServerOS -PostInstallationActivity $postInstallActivity -Domain contoso.azure
 
 Install-Lab
 
@@ -64,22 +64,6 @@ Add-VMNetworkAdapter -VMName ClientPC -SwitchName 'Default Switch'
 Copy-LabFileItem -Path C:\LabSources\SoftwarePackages\docs.zip -ComputerName (Get-LabVm -ComputerName AdminPC) -DestinationFolderPath C:\PII
 Invoke-LabCommand -ScriptBlock { Expand-Archive -LiteralPath C:\PII\docs.zip -DestinationPath C:\PII\ } -ComputerName AdminPC
 Invoke-LabCommand -ScriptBlock { Expand-Archive -LiteralPath C:\PII\docs.zip -DestinationPath C:\Users\Public\Documents;New-SmbShare -Name Documents -Path C:\Users\Public\Documents -FullAccess Everyone} -ComputerName AdminPC
-
-#Join AdminPC and ClientPC to domain
-Invoke-LabCommand -ScriptBlock { 
-[string]$userName = 'Contoso\Install'
-[string]$userPassword = 'Somepass1'
-[securestring]$secStringPassword = ConvertTo-SecureString $userPassword -AsPlainText -Force
-[pscredential]$cred = New-Object System.Management.Automation.PSCredential ($userName, $secStringPassword)
-Add-Computer -DomainName contoso.azure -Credential $cred -Restart 
-} -ComputerName AdminPC
-Invoke-LabCommand -ScriptBlock { 
-[string]$userName = 'Contoso\Install'
-[string]$userPassword = 'Somepass1'
-[securestring]$secStringPassword = ConvertTo-SecureString $userPassword -AsPlainText -Force
-[pscredential]$cred = New-Object System.Management.Automation.PSCredential ($userName, $secStringPassword)
-Add-Computer -DomainName contoso.azure -Credential $cred -Restart 
-} -ComputerName ClientPC
 
 #Update Office 365 ProPlus
 Invoke-LabCommand -ScriptBlock { Set-Location "C:\Program Files\Common Files\microsoft shared\ClickToRun\"; .\OfficeC2RClient.exe /update user } -ComputerName AdminPC
