@@ -5,12 +5,12 @@ Install-PackageProvider Nuget -Force
 Install-Module AutomatedLab -AllowClobber
 New-LabSourcesFolder -Drive C
 
-#You will require ISOs for Windows Server 2019, SQL Server 2017, and Office 2019 placed in your C:\LabSources\ISOs\ folder. If the SQL and Office ISOs you use are not the same as the ones listed below, please update the script to match yours.
+#You will require ISOs for Windows Server 2019, Windows 10, SQL Server 2017, and Office 2019 placed in your C:\LabSources\ISOs\ folder. If the SQL and Office ISOs you use are not the same as the ones listed below, please update the script to match yours.
 #>
 
 $LabName = 'AIPBYOL'
 $ServerOS = 'Windows Server 2019 Standard (Desktop Experience)'
-
+$ClientOS = 'Windows 10 Enterprise'
 
 
 #Install Lab
@@ -48,7 +48,7 @@ Add-LabMachineDefinition -Name ContosoDC -Roles RootDC -Memory 1GB -Processors 4
 $postInstallActivity = Get-LabPostInstallationActivity -CustomRole Office2019 -Properties @{ IsoPath = "$labSources\ISOs\en_office_professional_plus_2019_x86_x64_dvd_7ea28c99.iso" }
 $role = Get-LabMachineRoleDefinition -Role SQLServer2017 -Properties @{Features = 'SQL,Tools'}
 Add-LabMachineDefinition -Name AdminPC -Roles $role -Memory 2GB -Processors 4 -OperatingSystem $ServerOS -PostInstallationActivity $postInstallActivity -Domain contoso.azure
-Add-LabMachineDefinition -Name ClientPC -Memory 2GB -Processors 4 -OperatingSystem $ServerOS -PostInstallationActivity $postInstallActivity -Domain contoso.azure
+Add-LabMachineDefinition -Name ClientPC -Memory 2GB -Processors 4 -OperatingSystem $ClientOS -PostInstallationActivity $postInstallActivity -Domain contoso.azure
 
 Install-Lab
 
