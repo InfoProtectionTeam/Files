@@ -1,17 +1,9 @@
 # Setting up your Lab Environment
 
-**Azure Information Protection** (as described in the introduction) is one part of the larger **Microsoft Information Protection** story.  With Microsoft Information Protection, Microsoft is streamlining how all applications that require information protection capabilities interact.  This provides a **unified interface** where both Microsoft and Partner applications can **classify and protect sensitive information**. 
-
-Ultimately, this means better integration across our information protection solutions and a more consistent approach to protecting your sensitive data.
-
-![](./media/MIPsimplify.png) 
-
-The image below shows examples of technologies that can interface with Microsoft Information Protection. Although we will not delve deeply into all of these technologies in this lab, we will provide resources in the conclusion that may be used for further exposition.  
-
-![](./media/MIPCapabilities.png)
-
-![](./media/MIP.png) 
+In this section we will learn how to set-up our ***Build-Your-Own-Lab Environments***. As shown in the intro, we will use a script that is based off of the AutomatedLab framework to create 3 machines - ContosoDC, AdminPC, and ClientPC. In addition to creating these machines, we also get many of the dependencies pre-installed, such as the Domain Controller already set up in ContosoDC, SQL Server and Office ProPlus in AdminPC along with **Azure Information Protection Unified Labeling Client**, and ClientPC again with Office ProPlus and the **Azure Information Protection Unified Labeling Client**. 
 
 ## Where to Begin
 
-With General Availability of Unified Labeling clients and Sensitivity Labels in the Security and Compliance Center, there has been some confusion on where customers should start their deployment and which clients they should use. This is a common question, and one that requires understanding of the capabilities available in the Azure Information Protection client (classic) versus what is currently available in the Azure Information Protection Unified Labeling client. 
+First you need to decide between the two options for BYOL which is either creating your machines through your local Hypervisor or with Microsoft Azure. 
+
+You can find the HyperV Script here and the Azure script here.
