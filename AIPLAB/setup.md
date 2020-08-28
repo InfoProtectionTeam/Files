@@ -4,6 +4,6 @@ In this section we will learn how to set-up our ***Build-Your-Own-Lab Environmen
 
 ## Where to Begin
 
-First you need to decide between the two options for BYOL which is either creating your machines through your local Hypervisor or with Microsoft Azure. 
+First you need to decide between the two options for BYOL which is either creating your machines through your local HyperVisor or with Microsoft Azure. 
 
 You can find the HyperV Script here and the Azure script here.
