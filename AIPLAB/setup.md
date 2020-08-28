@@ -16,5 +16,5 @@ The AutomatedLab Framework (https://github.com/AutomatedLab) was used to create 
 	Install-Module AutomatedLab -AllowClobber
 	New-LabSourcesFolder -Drive C
 	Install-Module Az
-	...
+	```
 The First command 
