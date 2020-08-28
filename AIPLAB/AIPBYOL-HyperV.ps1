@@ -1,4 +1,4 @@
-﻿#If you have not yet installed AutomatedLab, download the MSI from https://github.com/AutomatedLab/AutomatedLab/releases or run the PowerShell commands below (Highly recommend commands on ease of use).
+﻿#If you have not yet installed AutomatedLab, download the MSI from https://github.com/AutomatedLab/AutomatedLab/releases or run the PowerShell commands below (Highly recommend using PShell for better experience).
 
 # Install-PackageProvider Nuget -Force
 # Install-Module AutomatedLab -AllowClobber
