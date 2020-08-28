@@ -7,3 +7,7 @@ In this section we will learn how to set-up our ***Build-Your-Own-Lab Environmen
 First you need to decide between the two options for BYOL which is either creating your machines through your local HyperVisor or with Microsoft Azure. 
 
 You can find the HyperV Script [here](AIPBYOL-HyperV.ps1) and the Azure script [here](AIPBYOL-Azure.ps1).
+
+## AutomatedLab Framework
+
+The AutomatedLab Framework (https://github.com/AutomatedLab)
