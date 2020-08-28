@@ -1,11 +1,11 @@
-﻿#If you have not yet installed AutomatedLab, download the MSI from https://github.com/AutomatedLab/AutomatedLab/releases or run the PowerShell commands below.
+﻿#If you have not yet installed AutomatedLab, download the MSI from https://github.com/AutomatedLab/AutomatedLab/releases or run the PowerShell commands below (Highly recommend commands on ease of use).
 
 # Install-PackageProvider Nuget -Force
 # Install-Module AutomatedLab -AllowClobber
 # New-LabSourcesFolder -Drive C
 # Install-Module Az
 
-#You will require ISO for Office 2019 placed in your C:\LabSources\ISOs\ folder. If the Office ISOs you use are not the same as the ones listed below, please update the script to match yours.
+#You will require ISOs for Office 2019, SQL Server 2017/2019 (change script accordingly for this), Windows Server 2019, and Windows 10 Enterprise placed in your C:\LabSources\ISOs\ folder. If the ISOs you use are not the same as the ones listed below, please update the script to match yours.
 
 $labSources = Get-LabSourcesLocation -Local
 
@@ -32,9 +32,9 @@ if (-not (Test-Path -Path $PIIZIPFilePath))
     Get-LabInternetFile -Uri $PIIZIPUri -Path $PIIZIPFilePath
 }
 
-$labName = 'AIPBYOL' #THIS NAME MUST BE GLOBALLY UNIQUE
+$labName = 'AIPBYOL-HyperV'
 
-$azureDefaultLocation = 'Central US' #COMMENT OUT -DefaultLocationName BELOW TO USE THE FASTEST LOCATION
+# $azureDefaultLocation = 'Central US'
 
 #create an empty lab template and define where the lab XML files and the VMs will be stored
 New-LabDefinition -Name $labName -DefaultVirtualizationEngine HyperV
