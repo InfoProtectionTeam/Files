@@ -14,7 +14,7 @@ The AutomatedLab Framework (https://github.com/AutomatedLab) was used to create 
 
 	```PowerShell
 	Install-PackageProvider Nuget -Force
-  Install-Module AutomatedLab -AllowClobber
-  New-LabSourcesFolder -Drive C
-  Install-Module Az
+	Install-Module AutomatedLab -AllowClobber
+	New-LabSourcesFolder -Drive C
+	Install-Module Az
 	```
