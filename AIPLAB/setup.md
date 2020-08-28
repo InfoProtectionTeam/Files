@@ -11,10 +11,12 @@ You can find the HyperV Script [here](AIPBYOL-HyperV.ps1) and the Azure script [
 ## AutomatedLab Framework
 
 The AutomatedLab Framework (https://github.com/AutomatedLab) was used to create this lab set-up. As a prequisite for getting started, you must use the following PowerShell Commands on your PowerShell ISE as administrator to have the right modules to run the rest of the lab:
+
 	```PowerShell
 	Install-PackageProvider Nuget -Force
 	Install-Module AutomatedLab -AllowClobber
 	New-LabSourcesFolder -Drive C
 	Install-Module Az
 	```
+
 The First command 
